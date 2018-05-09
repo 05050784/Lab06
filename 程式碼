@@ -12,3 +12,47 @@ void loop() {
 //lcd.setCursor(0, 1);
 //lcd.print(millis()/1000); // print the number of seconds since reset:
 }
+//CHECK POINT 2
+#include <LiquidCrystal.h> // include the library code
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2); // initialize interface pins
+   byte i=0;
+void setup() {
+  Serial.begin(9600);
+lcd.begin(16, 2); // set up the LCD's number of columns and rows:
+//lcd.print("05050784"); // Print a message to the LCD.
+//lcd.print("Sharon");
+//lcd.autoscroll();
+}
+void loop() 
+{
+    char a;
+ 
+    if (Serial.available())
+    {
+            a = Serial.read();
+            if (a=='\n')
+            {
+                i++;
+                Serial.print(i);
+                if (i!=3)
+                {  
+                    //i++;
+                    lcd.setCursor(0, i);
+                }
+               // else if(i==2)
+                //    i=0;
+                else
+                {
+                    Serial.print("111");
+                    lcd.clear();
+                }
+             }
+              else
+              {
+                  if (i!=2)
+                  lcd.print(a);
+                  //else
+                  //lcd.noDisplay();
+              }
+     }
+ }
